@@ -2627,7 +2627,9 @@ select:-webkit-autofill:active {
         var pending = false;
 
         function shouldSkipElement(el) {
-            return !el || skippedTags[el.tagName];
+            if (!el || skippedTags[el.tagName]) return true;
+            if (el.classList && (el.classList.contains('progress') || el.classList.contains('label'))) return true;
+            return false;
         }
 
         function replaceNodeText(root) {
